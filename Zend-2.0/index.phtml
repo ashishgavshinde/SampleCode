@@ -1,0 +1,102 @@
+<?php
+/**
+* View script for listing CMS pages
+*/
+
+// Set page title
+$title = $this->translate('Manage CMS Pages');
+$this->headTitle($title); ?>
+
+<div id="inner_content">
+	<h1><?php echo $this->escapeHtml($title); ?></h1>
+	<span class="flt_left">
+		<a class="btn" title="<?php echo $this->translate('Add new CMS page');?>" href="<?php echo $this->url('cmspage', array('action'=>'add'));?>">
+			<?php echo $this->translate('Add new CMS page');?>
+		</a>
+	</span>
+
+	<span class="flt_right">
+	<?php if($this->showSearch){ ?>
+		<form action="<?php echo $this->url('cmspage',array('action'=>'index')); ?>" name='searchGridForm' id="searchGridForm" method="get" >
+			<label class="left"><?php echo $this->translate('Search:');?>
+				<input type="text" name="search" />
+			</label>
+			<input class="btn button_class" type="submit" value="Search" title="Search"/>
+		</form>
+	<?php }?>
+	</span>
+	
+	<?php if (!empty($this->message)) { ?>
+	<div class="notice success"><p><?php echo $this->message; ?></p></div>
+	<?php } ?>
+	
+	<table class="table">
+		<tr>
+			<th><?php echo $this->translate('Sr.N.');?></th>
+			<?php foreach ($fields as $field) { ?>
+				<?php if ($field['visible'] == 1) { ?>
+			<th>
+			<?php if ($field['sorting'] == 1) { ?>
+				<a title="<?php echo $field['label']; ?>" href="<?php echo $this->url('cmspage',array('action'=>'index')).'?sort='.$field['fieldName'].'&order='.$defaultSortOrder; ?>">
+				<?php echo $field['label']; ?>
+				</a>
+			<?php } else {
+				echo $field['label'];
+			} ?>
+			</th>
+			<?php }
+			}?>
+			<th><?php echo $this->translate('Action');?></th>
+		</tr>
+		<?php
+		if(count($this->cmspages)>0){
+			$counter=$this->serialNumber;
+			foreach ($this->cmspages as $cmspage){
+				if(is_object($cmspage)){
+					$cmspage = (array)$cmspage;
+				} ?>
+		<tr>
+			<td><?php echo $counter;?></td>		
+			<td><?php echo $this->escapeHtml($cmspage['DESCRIPTION']);?></td>
+			<td><?php echo $this->escapeHtml(date(DATE_FORMAT,strtotime($cmspage['MODIFIED_DATE'])));?></td>
+			<td><?php echo $this->escapeHtml(date(DATE_FORMAT,strtotime($cmspage['CREATED_DATE'])));?></td>
+			<td>
+				<a href="<?php echo $this->url('cmspage', array('action'=>'edit','id'=>$cmspage['ID']));?>">
+					<img border="0px" alt="Edit" title="Edit" src="<?php echo $this->basePath(); ?>/img/admin/edit.png" />
+				</a>
+				<a target="_blank" href="<?php echo $this->url('cmspage',
+array('action'=>'view', 'id' => $cmspage['ID']));?>">
+					<img border="0px" alt="View" title="View" src="<?php echo $this->basePath(); ?>/img/admin/view.png" />
+				</a>
+				<a class="thickbox" href="<?php echo $this->url('cmspage',
+array('action'=>'delete', 'id' => $cmspage['ID']));?>">
+					<img border="0px" title="Delete" src="<?php echo $this->basePath(); ?>/img/admin/delete.gif" />
+				</a>
+			</td>
+		</tr>
+		<?php
+			$counter++;
+		}?>
+	<?php }
+	else { ?>
+		<tr>
+			<td colspan="5">
+				<div class="alert alert-info"><?php echo $this->translate('No Record Found.'); ?></div>
+			</td>
+		</tr>
+	<?php } ?> 
+	</table>
+
+	<?php
+	if(count($this->cmspages)>0){
+		/*Add at the end of the file after the table*/
+		echo $this->paginationControl(
+			/*The paginator object*/
+			$this->cmspages,
+			/* the scrolling style e.g All, Elastic, sliding, Jumping */
+			'sliding',
+			// the partial to use to render the control
+			array('partial/paginator.phtml', 'Cmspage')
+		);
+	} ?>
+</div>
