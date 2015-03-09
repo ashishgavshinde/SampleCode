@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/kilter/!svn/ver/27/public/js/common/tiny_mce/plugins/imagemanager/classes/Authenticators
+END
+SessionAuthenticator.php
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/kilter/!svn/ver/27/public/js/common/tiny_mce/plugins/imagemanager/classes/Authenticators/SessionAuthenticator.php
+END
+IPAuthenticator.php
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/kilter/!svn/ver/27/public/js/common/tiny_mce/plugins/imagemanager/classes/Authenticators/IPAuthenticator.php
+END
+BaseAuthenticator.php
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/kilter/!svn/ver/27/public/js/common/tiny_mce/plugins/imagemanager/classes/Authenticators/BaseAuthenticator.php
+END

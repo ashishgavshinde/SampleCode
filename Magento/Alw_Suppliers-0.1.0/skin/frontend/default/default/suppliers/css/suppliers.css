@@ -1,0 +1,93 @@
+/*Registration css start*/
+.terms-conditions .checkbox-icon{
+    padding-right:5px;
+}
+.accept-text{}
+.submit-left-button{
+   float: right;
+}
+.back-button{
+    float: left;
+    padding-top: 27px;
+    width:200px;
+}
+.back-button button{
+    float:left !important;
+}
+.buttons-set {
+    margin: 2em 0 0;
+}
+/*Registration css close*/
+/*Supplier detail css start*/
+.supplier-review{
+ 	border: 1px solid #C4C6C8;
+}
+.supplier-img-box{
+    float: left;
+    width: 267px;
+}
+.supplier-details{
+    float: right;
+    width: 330px;
+}
+ul.social-icon li{
+    float:left;
+    padding:5px;
+}
+.supplier-details p.back-link{
+    float: right;
+    text-align: right;
+    width: 100%;
+}
+.box-reviews{
+    border: 1px solid #CCCCCC;
+    margin: 10px 0;
+    padding: 10px;
+}
+#product-review-table{
+    margin-bottom:10px;
+}
+.box-reviews h2{
+    border-bottom: 2px solid #0A263C;
+    margin-bottom: 20px;
+    padding: 5px 0;
+}
+.supplier-detail {
+    border: 1px solid #CCCCCC;
+    float: left;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 96%;
+}
+.supplier-detail .supplier-logo {
+    border: 1px solid #EEEEEE;
+    float: left;
+}
+.supplier-right-details {
+    float: left;
+    padding: 0 10px;
+}
+.review-latest-blog{
+}
+.review-latest-blog .review-container-blog , .review-latest-blog .pager{
+    border-left:1px solid #E2E2E2;
+    border-right:1px solid #E2E2E2;
+}
+.review-latest-blog .review-container-blog{
+    padding:10px;
+}
+.supplier-review  .supplier-essential{
+    background: url("../images/bkg_product-view.gif") no-repeat scroll 100% 0 #FFFFFF;
+    padding: 25px;
+    clear: both;
+    content: ".";
+    display: block;
+    font-size: 0;
+    height: 0;
+    overflow: hidden;
+}	
+.supplier-review-list {
+	border-bottom: 2px solid #0A263C;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}	

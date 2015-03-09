@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <suppliers translate="label" module="suppliers">
+            <label>suppliers</label>
+            <sort_order>200</sort_order>
+        </suppliers>
+    </tabs>
+    <sections>
+        <suppliers  translate="label" module="suppliers">                    
+            <label>Suppliers</label>
+            <tab>suppliers</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>200</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>            
+                <groups>
+                    <suppliers translate="label"> 
+                        <label>Suppliers Configuration</label>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>0</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <fields>
+							<enabled translate="label">
+								<label>Enable</label>
+								<frontend_type>select</frontend_type>
+								<source_model>adminhtml/system_config_source_yesno</source_model>
+								<sort_order>0</sort_order>
+								<show_in_default>1</show_in_default>
+								<show_in_website>1</show_in_website>
+								<show_in_store>1</show_in_store>
+							</enabled>
+                            <role_supplier_user_dropdown translate="Supplier User Role">
+                                <label>Role</label>
+                                <comment>Supplier Role</comment>
+                                <frontend_type>customselect</frontend_type>
+                                <disable>1</disable>
+                                <source_model>suppliers/source_userrole</source_model>
+                                <sort_order>10</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>0</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </role_supplier_user_dropdown>
+                            <commissions translate="label">
+                                <label>Sales %</label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>20</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>0</show_in_website>
+                                <show_in_store>0</show_in_store>
+                                <comment>Set sale margin</comment>
+                                <validate>validate-greater-than-zero required-entry</validate>
+                            </commissions>
+							<paypal_mode_dropdown translate="label">
+								<label>Paypal Mode</label>
+								<comment>Paypal Mode</comment>
+								<frontend_type>select</frontend_type>
+								<source_model>suppliers/source_paypalrole</source_model>
+								<sort_order>40</sort_order>
+								<show_in_default>1</show_in_default>
+								<show_in_website>0</show_in_website>
+								<show_in_store>0</show_in_store>
+							</paypal_mode_dropdown> 
+                            <payment_mode_dropdown translate="label">
+                                <label>Payment Mode</label>
+                                <comment>Payment Mode</comment>
+                                <frontend_type>select</frontend_type>
+                                <source_model>suppliers/source_paymentrole</source_model>
+                                <sort_order>30</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>0</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </payment_mode_dropdown> 
+							<termsandcondition translate="label">
+								<label>Field label </label>
+								<frontend_type>customeditor</frontend_type>
+								<sort_order>150</sort_order>
+								<show_in_default>1</show_in_default>
+								<show_in_website>1</show_in_website>
+								<show_in_store>1</show_in_store>
+							</termsandcondition>
+                        </fields>
+                    </suppliers>
+                </groups>
+        </suppliers>
+      </sections>
+</config>

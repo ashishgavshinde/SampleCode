@@ -1,0 +1,83 @@
+<?php
+/**
+ * Module name: CMS page
+ * File: View file of CmsPageController.php to edit CMS page
+**/
+
+$title = 'Edit Cmspage';
+$this->headTitle($title); ?>
+
+<!-- Page heading -->
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url(
+	'cmspage',
+	array(
+		'action' => 'edit',
+		'id' => $this->id,
+	)
+));
+$form->prepare(); ?>
+
+<!-- Open form tag -->
+<?php echo $this->form()->openTag($form); ?>
+
+<!-- Start the block -->
+<fieldset>
+	<?php echo $this->formHidden($form->get('page_id')); ?>
+	
+	<!-- form field for Page name -->
+	<div>
+		<label>Page Name <em>*</em></label>
+		<?php echo $this->formRow($form->get('page_name')); ?>
+		<label class="error" style="display:none;" id="pageNameExists">Page Name already exist.</label>
+	</div>
+	
+	<!-- form field for Page status -->
+	<div>
+		<label>Page Status <em>*</em></label>
+		<?php echo $this->formRow($form->get('status')); ?>
+	</div>
+	
+	<!-- form field for Page content -->
+	<div>
+		<label>Page Content<em>*</em></label>
+		<?php echo $this->formRow($form->get('content')); ?>
+		<div id="page_content_error"  generated="true" class="error" style="display: none;">Please enter page content</div>
+	</div>
+	
+	<!-- form field for Page url key -->
+	<div>
+		<label>Page Url Key<em>*</em></label>
+		<?php echo 'http://'.$_SERVER['SERVER_NAME'].$this->basePath().'/'.$cmsPageData->url_key.'.html'; ?>
+		<input type="hidden" value="<?php echo $cmsPageData->url_key; ?>" name="url_key">
+	</div>
+	
+	<!-- form field for meta title-->
+	<div>
+		<label>Meta Title</label>
+		<?php echo $this->formRow($form->get('meta_title')); ?>
+	</div>
+	
+	<!-- form field for meta keywords -->
+	<div>
+		<label>Meta Keywords</label>
+		<?php echo $this->formRow($form->get('meta_keywords')); ?>
+	</div>
+	
+	<!-- form field for meta descp -->
+	<div>
+		<label>Meta Description</label>
+		<?php echo $this->formRow($form->get('meta_description')); ?>
+	</div>
+	
+	<!-- form field for submit button-->
+	<div>
+		<?php echo $this->formSubmit($form->get('submit')); ?>
+	</div>
+
+</fieldset>
+<!-- Close form tag-->
+<?php echo $this->form()->closeTag();

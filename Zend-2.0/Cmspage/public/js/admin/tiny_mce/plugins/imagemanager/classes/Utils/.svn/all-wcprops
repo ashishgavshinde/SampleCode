@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/kilter/!svn/ver/27/public/js/common/tiny_mce/plugins/imagemanager/classes/Utils
+END
+ClientResources.php
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/kilter/!svn/ver/27/public/js/common/tiny_mce/plugins/imagemanager/classes/Utils/ClientResources.php
+END
+Error.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/kilter/!svn/ver/27/public/js/common/tiny_mce/plugins/imagemanager/classes/Utils/Error.php
+END
+JSCompressor.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/kilter/!svn/ver/27/public/js/common/tiny_mce/plugins/imagemanager/classes/Utils/JSCompressor.php
+END
+JSON.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/kilter/!svn/ver/27/public/js/common/tiny_mce/plugins/imagemanager/classes/Utils/JSON.php
+END
+ResultSet.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/kilter/!svn/ver/27/public/js/common/tiny_mce/plugins/imagemanager/classes/Utils/ResultSet.php
+END
+LanguagePack.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/kilter/!svn/ver/27/public/js/common/tiny_mce/plugins/imagemanager/classes/Utils/LanguagePack.php
+END
+Logger.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/kilter/!svn/ver/27/public/js/common/tiny_mce/plugins/imagemanager/classes/Utils/Logger.class.php
+END
+CSSCompressor.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/kilter/!svn/ver/27/public/js/common/tiny_mce/plugins/imagemanager/classes/Utils/CSSCompressor.php
+END

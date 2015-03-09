@@ -1,0 +1,88 @@
+<?php
+/**
+ * Module name: CMS page
+ * File: View file of CmsPageController.php to add CMS page
+**/
+
+$title = 'Add New CMS Page';
+$this->headTitle($title); ?>
+
+<!-- Page heading -->
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+// set the action of Zend form
+$form->setAttribute('action', $this->url('cmspage', array('action' => 'add')));
+$form->prepare();
+echo $this->form()->openTag($form); ?>
+
+<fieldset>
+ 
+ <!-- Open form tag -->
+ <?php echo $this->formHidden($form->get('page_id')); ?>
+ 
+ <!-- form field for page name-->
+ <div>
+  <label>Page Name <em>*</em></label>
+  <?php $form->get('page_name')->setAttribute('title','Page Name '); echo $this->formRow($form->get('page_name')); ?>
+  <label class="error" style="display:none;" id="pageNameExists">Page Name already exist.</label>
+ </div>
+ 
+ <!-- form field for page status-->
+ <div>
+  <label>Page Status <em>*</em></label>
+  <?php $form->get('status')->setAttribute('title','Page Status'); echo $this->formRow($form->get('status')); ?>
+ </div>
+ 
+ <!-- form field for page content-->
+ <div>
+  <label>Page Content<em>*</em></label>
+  <?php
+   $form->get('content')->setAttribute('title','Page Content');
+   echo $this->formRow($form->get('content')); ?>
+  <div id="page_content_error"  generated="true" class="error" style="display: none;">Please enter page content</div>
+ </div>
+ 
+ <!-- form field for url key -->
+ <div>
+  <label>Page Url Key<em>*</em></label>
+  <?php echo 'http://'.$_SERVER['SERVER_NAME'].$this->basePath().'/'.$this->formRow($form->get('url_key')).'.html'; ?>
+  <div>
+   <label style="display: none;" for="url_key" generated="true" class="error">Please enter page url.</label>
+   <label class="error" style="display:none;" id="urlKeyExists">Url Key already exists.</label>
+  </div>
+ </div>
+ 
+ <!-- form field for meta title-->
+ <div>
+  <label>Meta Title</label>
+  <?php
+   $form->get('meta_title')->setAttribute('title','Meta Title');
+   echo $this->formRow($form->get('meta_title')); ?>
+ </div>
+ 
+ <!-- form field for meta keywords-->
+ <div>
+  <label>Meta Keywords</label>
+  <?php $form->get('meta_keywords')->setAttribute('title','Meta Keywords'); echo $this->formRow($form->get('meta_keywords')); ?>
+ </div>
+ 
+ <!-- form field for meta description-->
+ <div>
+  <label>Meta Description</label>
+  <?php
+  $form->get('meta_description')->setAttribute('title','Meta Description');
+  echo $this->formRow($form->get('meta_description')); ?>
+ </div>
+ 
+ <!-- form field for submit -->
+ <div>
+  <?php
+  $form->get('submit')->setAttribute('title','Submit');
+  echo $this->formSubmit($form->get('submit')); ?>
+  </div>
+ 
+</fieldset>
+
+<!-- Close form tag -->
+<?php echo $this->form()->closeTag(); ?>

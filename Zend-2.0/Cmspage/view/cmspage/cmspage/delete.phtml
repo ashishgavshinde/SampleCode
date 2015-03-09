@@ -1,0 +1,39 @@
+<?php
+/**
+ * Module name: CMS page
+ * File: View file of CmsPageController.php to delete CMS page
+**/
+?>
+<!-- initialize the variables used in thickbox -->
+<script type="text/javascript">
+	// set the new width and height dimensions here..
+	var TB_WIDTH = 350, TB_HEIGHT = 200;
+	
+	$("#TB_window").css({
+		marginLeft: '-' + parseInt((TB_WIDTH / 2), 10) + 'px',
+		width: TB_WIDTH + 'px',
+		height: TB_HEIGHT + 'px',
+		marginTop: '-' + parseInt((TB_HEIGHT / 2), 10) + 'px'
+	});
+	
+	// function to fire ajax request to delete the page
+	jQuery("#yes").click(function(){
+		url = baseUrl+'/cmspage/delete/pid/'+jQuery("#confirm_id").val();
+		location.href = url;
+	});
+	
+	// function for close confirm box
+	jQuery("#no").click(function(){
+		tb_remove();
+	});
+</script>
+
+<!-- Confirmation block for thickbox -->
+<div id="msgBlock">
+	<p>Are you sure, you want to delete this cms page?</p>
+	<div class="form-button">
+		<input  type="hidden" value="<?php echo $this->id;?>" id="confirm_id"/>
+		<input title="Yes" type="button"  class="button blue" value="Yes" id="yes" name="yes">
+		<input title="No" type="button" class="button blue" value="No" id="no" name="no">
+	</div>
+</div>

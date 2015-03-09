@@ -1,0 +1,27 @@
+<?php
+/**
+ * Module name: CMS page
+ * File: View file of ViewCmsPageController.php to view the CMS page
+**/
+
+// if cms page exists 
+if($cmsPageData){
+	$title=$cmsPageData->page_name;
+	$this->headTitle($title); ?>
+	
+	<!-- Page heading -->
+	<h1><?php echo $this->escapeHtml($title); ?></h1>
+	
+	<!-- Page content -->
+	<div> <?php echo $cmsPageData->content; ?> </div>
+<?php
+}
+// else show message
+else {
+	$this->headTitle('Cms Page'); ?>
+	
+	<h1>No Cmspage Found.</h1>
+	
+	<?php
+}
+ 

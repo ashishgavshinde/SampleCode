@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Alw_Suppliers>
+      <active>true</active>
+      <codePool>community</codePool>
+      <version>0.1.0</version>
+    </Alw_Suppliers>
+  </modules>
+</config>

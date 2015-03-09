@@ -1,0 +1,122 @@
+<?php
+/**
+ * Module name: CMS page
+ * File: View file of CmsPageController.php to list the CMS page
+**/
+
+$title = 'Manage CMS Pages';
+$this->headTitle($title); ?>
+
+<!-- Page heading -->
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<!-- Button to add new page -->
+<p>
+ <a title="Add New CMS Page" href="<?php echo $this->url('cmspage', array('action'=>'add'));?>">Add New CMS Page</a>
+</p>
+
+<!-- Message block -->
+<?php if(!empty($this->message)){ ?>
+<div class="alert alert-info"><?php echo $this->message; ?></div>
+<?php } ?>
+
+<!-- Search block -->
+<?php if($this->showSearch){ ?>
+<form action="<?php echo $this->url('cmspage',array('action'=>'index')); ?>" name='searchGridForm' id="searchGridForm" method="get" >
+ <label class="left">Search: <input title="Search" type="text" name="search"> </label>
+ <input title="Search" class="button" type="submit" value="Search"/>
+</form>
+<?php }?>
+
+<!-- List of cms pages with action buttons and pagination (in tabular format) -->
+<table class="table">
+ <tr>
+  
+  <th>Sr.N.</th>
+  
+  <?php
+   foreach($fields as $field){
+    if($field['visible'] == 1){ ?>
+  <th> 
+  <?php if($field['sorting']==1){ ?>
+   <a title="<?php echo $field['label']; ?>" href="<?php echo $this->url('cmspage',array('action'=>'index')).'?sort='.$field['fieldName'].'&order='.$defaultSortOrder; ?>">
+    <?php echo $field['label']; ?>
+   </a>
+  <?php }
+  else {
+   echo $field['label'];
+  } ?>
+  </th>
+  <?php
+  }
+ }?>
+ 
+ <th>Action</th>
+
+</tr>
+ 
+<?php
+ if(count($cmspages)>0){
+ $counter=$this->serialNumber;
+ foreach ($cmspages as $cmspage){  ?>
+ <tr>
+  
+  <td><?php echo $counter;?></td>
+  
+  <td><?php echo $this->escapeHtml($cmspage->page_name);?></td>
+  
+  <td><?php echo $this->escapeHtml(date('Y-m-d',$cmspage->last_modified));?></td>
+  
+  <td>
+  <?php  if($cmspage->status == 0) { ?>
+   <img class="editicon" src="img/admin/cms_page_inactive_on.gif" title="<?php echo "Disable";?>" border="0px" />
+   <a href="<?php echo $this->url('cmspage',array('action'=>'changestatus', 'id' => $cmspage->page_id,'set-status' => 1));?>">
+   <img class="editicon" src="img/admin/cms_page_active_off.gif" title="<?php echo "Enable";?>" border="0px" />
+   </a>
+  <?php }
+   else { ?>
+   <a href="<?php echo $this->url('cmspage',array('action'=>'changestatus', 'id' => $cmspage->page_id,'set-status' => 0)); ?>">
+   <img class="editicon" src="img/admin/cms_page_inactive_off.gif" title="<?php echo "Disable";?>" border="0px" />
+   </a>
+   <img class="editicon" src="img/admin/cms_page_active_on.gif" title="<?php echo "Enable";?>" border="0px" />
+  <?php } ?>
+  </td>
+  
+  <td>
+   <a title="Edit" href="<?php echo $this->url('cmspage',
+   array('action'=>'edit', 'id' => $cmspage->page_id));?>">Edit</a>
+   <a title="View" target="_blank" href="<?php echo $this->url('cmspage',
+   array('action'=>'view', 'id' => $cmspage->page_id));?>">View</a>
+   <a title="Delete" class="thickbox" href="<?php echo $this->url('cmspage',
+   array('action'=>'delete', 'id' => $cmspage->page_id));?>">Delete</a>
+  </td>
+  
+ </tr>
+ 
+<?php $counter++;
+ } ?>
+ 
+</table>
+
+<?php
+}
+else { ?>
+<!-- Error message -->
+<div class="alert alert-info"><?php echo "No Record Found."; ?></div>
+
+<?php } ?>
+
+<?php
+// Pagination block 
+if(count( $this->cmspages)>1){
+ echo $this->paginationControl(
+	$this->cmspages,
+	'sliding',
+	// the partial to use to render the control
+	array('partial/paginator.phtml', 'Cmspage'),
+	// the route to link to when a user clicks a control link
+	array(
+	'route' => 'cmspage'
+	)
+      );
+ } ?>

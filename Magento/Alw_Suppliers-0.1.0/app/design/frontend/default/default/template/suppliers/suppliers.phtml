@@ -1,0 +1,302 @@
+<?php
+/**
+ * @category    design
+ * @package     default_default
+ * Create supppliers registration form template
+ * @var $this Alw_Suppliers_Block_Suppliers
+ **/
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php
+    /*Add Js to show fancy box for cancel commission */
+     $jsPath =  Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>
+    <!-- Add mousewheel plugin (this is optional) -->
+    <script type="text/javascript" src="<?php echo $jsPath?>suppliers/fancybox/jquery-1.9.0.min.js"></script>
+    <!-- Add fancyBox main JS and CSS files -->
+    <script type="text/javascript" src="<?php echo $jsPath?>suppliers/fancybox/jquery.fancybox.js?v=2.1.4"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo $jsPath?>suppliers/fancybox/jquery.fancybox.css?v=2.1.4" media="screen" />
+    <script type="text/javascript">
+        jQuery.noConflict();
+        jQuery(document).ready(function() {
+            jQuery('#termsandcondition').fancybox({
+            helpers: { 
+                title: null
+            }
+        });
+        });
+    </script>
+    <div class="account-create">
+        <div class="page-title">
+            <h1><?php echo $this->__('Create an Account') ?></h1>
+        </div>
+        <?php echo $this->getMessagesBlock()->getGroupedHtml();
+            $post=Mage::getSingleton('core/session')->getPostValue();
+        ?>
+        <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate">
+            <div class="fieldset">
+                <h2 class="legend"><?php echo $this->__('Personal Information') ?></h2>
+                <ul class="form-list">
+                   <li class="fields">
+                       <div class="field"><label for="user_name" class="required"><?php echo $this->__('User Name') ?><em>*</em></label>
+                           <div class="input-box">
+                                <input type="text" name="username" id="user_name" value="<?php echo $post['username'];?>" title="<?php echo $this->__('User Name') ?>" maxlength="20" class="input-text required-entry validate-alphanumber validate-length maximum-length-20" />
+                           </div>
+                        </div>
+                        <div class="field"><label for="email_address" class="required"><?php echo $this->__('Email Address') ?><em>*</em></label>
+                            <div class="input-box">
+                                <input type="text" name="email" id="email_address" value="<?php echo $post['email'];?>" title="<?php echo $this->__('Email Address') ?>" class="input-text validate-email required-entry " />
+                            </div>
+                        </div>
+                   </li>
+                    <li>
+                        <div class="field"><label for="first_name" class="required"><?php echo $this->__('First Name') ?><em>*</em></label>
+                            <div class="input-box">
+                                <input type="text" name="firstname" id="first_name" value="<?php echo $post['firstname'];?>" maxlength="20" title="<?php echo $this->__('First Name') ?>" class="input-text required-entry validate-name validate-length maximum-length-20" />
+                            </div>
+                        </div>
+                        <div class="field"><label for="last_name" class="required"><?php echo $this->__('Last Name') ?><em>*</em></label>
+                            <div class="input-box">
+                                <input type="text" name="lastname" id="last_name" value="<?php echo $post['lastname'];?>" title="<?php echo $this->__('Last Name') ?>" maxlength="20" class="input-text required-entry validate-name validate-length maximum-length-20" /> 
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="fieldset">
+                <input type="hidden" name="create_address" value="1" />
+                <h2 class="legend"><?php echo $this->__('Address Information') ?></h2>
+                <ul class="form-list">
+                    <li class="fields">
+                        <div class="field">
+                            <label for="company" class="required"><em>*</em><?php echo $this->__('Company') ?></label>
+                            <div class="input-box">
+                                <input type="text" name="company" id="company" value="<?php echo $post['company']?>" title="<?php echo $this->__('Company') ?>" class="input-text required-entry" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="telephone" class="required"><em>*</em><?php echo $this->__('Phone/Mobile') ?></label>
+                            <div class="input-box">
+                                <input type="text" name="mobile" id="telephone" value="<?php echo $post['mobile'];?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry validate-phone-no" />
+                            </div>
+                        </div>
+                    </li>
+                    <li class="wide">
+                        <label for="street_1" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="address" value="<?php echo $post['address'];?>" title="<?php echo $this->__('Street Address') ?>" id="street_1" class="input-text required-entry" />
+                        </div>
+                    </li>
+                    <li class="fields">
+                        <div class="field">
+                            <label for="city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+                            <div class="input-box">
+                                <input type="text" name="city" value="<?php echo $post['city'];?>" title="<?php echo $this->__('City') ?>" class="input-text required-entry" id="city" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="zip" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
+                            <div class="input-box">
+                                <input type="text" name="zip_code" value="<?php echo $post['zip_code'];?>" title="<?php echo $this->__('Zip/Postal Code') ?>" maxlength="10"  id="zip" class="input-text required-entry" />
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fields">
+                        <div class="field">
+                            <label for="country" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+                            <div class="input-box">
+                               <?php $_countries = Mage::getResourceModel('directory/country_collection')->loadData()->toOptionArray(false); ?>
+                               <?php if (count($_countries) > 0): ?>
+                                    <select name="country" id="country" class="countries input-text required-entry">
+                                        <option value=""><?php echo $this->__('-- Please Select --') ?></option>
+                                         <?php foreach($_countries as $_country): 
+                                            if($_country['value'] == $post['country']):?>
+                                                <option value="<?php echo $_country['value'] ?>" selected="selected">
+                                                    <?php echo $_country['label'] ?>
+                                                </option>
+                                                <?php else:?>
+                                                <option value="<?php echo $_country['value'] ?>" >
+                                                    <?php echo $_country['label'] ?>
+                                                 </option>
+                                             <?php endif;?>
+                                         <?php endforeach; ?>
+                                    </select>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="region_id" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
+                            <div class="input-box">
+                                <div class="value" id ="states">
+                                    <input id="state" name="state" value="" title="state" type="text" class="input-text required-entry">
+                                </div>  
+                                <input type ="hidden" value="<?php echo $post['state'];?>" name="statevalue"/>                          
+                            </div>
+                         </div>
+                     </li>
+                     <li>
+                        <div class="field">
+                            <label for="fax" class="required"><?php echo $this->__('Fax') ?></label>
+                            <div class="input-box">
+                                <input type="text" name="fax" id="fax" value="<?php echo $post['fax'];?>" title="<?php echo $this->__('Fax') ?>" maxlength="20" class="input-text  validate-length maximum-length-20" /> 
+                            </div>
+                        </div>
+                    </li>
+                </ul>   
+            </div>
+            <div class="fieldset">
+                <h2 class="legend"><?php echo $this->__('Login Information') ?></h2>
+                <ul class="form-list">
+                    <li class="fields">
+                        <div class="field"><label for="password" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+                            <div class="input-box">
+                                <input type="password" name="password" id="password" title="<?php echo $this->__('Password') ?>" class="input-text required-entry validate-paslength validate-adminpas" maxlength="20" />
+                            </div>
+                        </div>
+                        <div class="field"><label for="confirmation" class="required"><em>*</em><?php echo $this->__('Re-Type Password') ?></label>
+                            <div class="input-box">
+                                <input type="password" name="confirmation" title="<?php echo $this->__('Re-Type Password') ?>" id="confirmation" class="input-text required-entry validate-cpassword" maxlength="20" />
+                            </div>
+                        </div>
+                    </li>
+                    <li><?php echo $this->__('Please enter captcha code below.') ?></li>
+                    <li class="wide ask-question-capcha"> 
+                        <input name="captacha_code" type="hidden" id="captacha_code" value="<?php echo $code=$this->getNewrandCode(6)?>" />
+                        <label for="image" class="capcha-img"><img src="<?php echo $this->getSecureImageUrl() ?>CaptchaSecurityImages.php?width=180&height=40&code=<?php echo $code?>" /></label><br/>
+                        <div class="input-box">
+                            <label for="security_code" class="required"><b><?php echo $this->__('') ?></b></label><br />
+                            <input class="input-text required-entry validate-captcha" id="security_code" name="security_code" type="text" value="" style="width:250px;"/> <br />
+                        </div> 
+                    </li>
+                    <li class="terms-conditions">
+                        <div class="input-box">
+                            <span class="checkbox-icon"><input type="checkbox" name="termsandcondition"  class="required-entry" /></span>
+                            <span class="accept-text"><?php echo $this->__('I accept') ?> <a href="<?php echo $this->getTermAndConditionActionUrl();?>" id="termsandcondition" class=" fancybox.ajax" ><?php echo $this->__('Terms and Conditions.') ?></a></span>
+                        </div>
+                    </li>
+                    <?php echo $this->getChildHtml('form.additional.info'); ?>
+                </ul>
+            </div>
+            <div class="buttons-set">
+                <div class="back-button"><button  type="submit" title="Back" class="button"><span><span>Back</span></span></button></div>
+                <div class="submit-left-button">
+                    <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+                    <button  type="submit" title="<?php echo $this->__('Submit') ?>" class="button"><span><span><?php echo $this->__('Submit') ?></span></span></button>
+                    <button  type="reset" title="<?php echo $this->__('Reset') ?>" class="button"><span><span><?php echo $this->__('Reset') ?></span></span></button>
+                </div>   
+            </div>
+        </form>
+    </div>
+<?php Mage::getSingleton('core/session')->setPostValue('');?>
+<script type="text/javascript">
+//<![CDATA[
+    var supplierForm = new VarienForm('form-validate', true);
+    /* Function to get state dropdown according to the country selected */
+    var addressesModel = Class.create();
+    addressesModel.prototype = {
+    initialize : function() {
+        this.bindCountryRegionRelation();
+        this.setCountryRegionRelation();
+    },
+    bindCountryRegionRelation : function(parentId){
+        if(parentId){
+            var countryElements = $(parentId).getElementsByClassName('countries');
+        }
+        else{
+            var countryElements = $$('.countries');
+        }
+        for(var i=0;i<=countryElements.length;i++){
+            if(countryElements[i]){
+                if(!countryElements[i].bindRegions || !countryElements[i].parentBindId || countryElements[i].parentBindId!=parentId){
+                    countryElements[i].bindRegions = true;
+                    countryElements[i].parentBindId = parentId;
+                    Event.observe(countryElements[i], 'change', function(event) {
+                        var countryCode = $('country')[$('country').selectedIndex].value;
+                        var url = '<?php echo $this->getUrl('suppliers/index/stateOnChange/'); ?>'+"country/"+countryCode;
+                        var xmlhttp;
+                        if (window.XMLHttpRequest){/*  code for IE7+, Firefox, Chrome, Opera, Safari*/
+                            xmlhttp=new XMLHttpRequest();
+                        } else {/* code for IE6, IE5 */
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.onreadystatechange=function(){
+                            if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                                var a =xmlhttp.responseText.evalJSON()
+                                document.getElementById('states').innerHTML = a.state;
+                            }
+                        }
+                        xmlhttp.open("GET",url,true);
+                        xmlhttp.send();
+                    })
+                }
+            }
+        }
+    },
+    processRespone:function(a){
+        b=a.responseText.evalJSON()
+        document.getElementById('states').innerHTML = b.state;
+    },   
+    setCountryRegionRelation : function(parentId){
+        if(parentId){
+            var countryElements = $(parentId).getElementsByClassName('countries');
+        }
+        else{
+            var countryElements = $$('.countries');
+        }
+            var countryCode = $('country')[$('country').selectedIndex].value;
+            var stateValue = $$('[name="statevalue"]')[0].value;
+            var url = '<?php echo $this->getUrl('suppliers/index/stateOnChange/'); ?>'+"country/"+countryCode+'/state/'+stateValue;
+            new Ajax.Request(url,{
+                     method:"post",
+                     onSuccess:this.processRespone.bind(this)
+            })
+        }
+    }
+    supplierAddresses = new addressesModel();
+//]]>
+    /* validate the captcha code */
+    var t_form = $('form-validate');
+    var captcha_code = Form.Element.getValue(t_form['captacha_code']); //Hidden field,real code
+    Validation.add('validate-captcha','Please enter valid captcha',function(the_field_value){
+        if(security_code != '' && captcha_code != the_field_value){
+            return false;
+        }
+        return true;
+    });
+
+    /* Function to add validation in name field to only accept alphabets*/
+    Validation.add('validate-name','Please enter valid name',function(the_field_value){
+        if (!(/^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*$/.test(the_field_value))) {
+            return false;
+        }
+        return true;
+    });
+
+    /* Function to add validation in password field to only accept alphabets and numbers*/
+    Validation.add('validate-adminpas','Password should contain both numeric and alphabetic characters. Spaces and other characters are not allowed.',function(pass){
+        if((/^(([0-9]+[a-zA-Z]+)+[0-9]*)+$/.test(pass)) || (/^(([a-zA-Z]+[0-9]+)+[a-zA-Z]*)+$/.test(pass))) {
+            return true;
+        }
+        return false;
+    });
+
+    /* Function to add validation in password field to validate lenght*/
+    Validation.add('validate-paslength','Please enter 7 or more characters',function(pass){
+        return !(pass.length < 7);
+    });
+
+    /* Function to add validation in user name */
+    Validation.add("validate-alphanumber","Please use only letters (a-z or A-Z) or numbers (0-9) in this field. Spaces and other characters are not allowed.",function(checkboxElem){
+        if (!(/^[a-zA-Z0-9]+$/.test(checkboxElem))) {
+            return false;
+        }
+        return true;
+    });
+
+    /* Function to add validation in phone number validation */
+    Validation.add('validate-phone-no','Please enter valid number',function(checkboxElem){
+        if (!(/^[+]?([\d]{0,3})?[\(\.\-\s]?([\d]{3})[\)\.\-\s]*([\d]{3})[\.\-\s]?([\d]{4})$/.test(checkboxElem))) {
+            return false;
+        }
+        return true;
+    });
+</script>
